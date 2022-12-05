@@ -6,4 +6,4 @@ let ir = salarioBruto * 10 / 100;
 
 let salarioLiquido = salarioBruto - ir;
 
-console.log( `${nome} tem um salário líquido de R$ ${salarioLiquido}`);
+console.log(`${nome} tem um salário líquido de R$ ${salarioLiquido}`);
