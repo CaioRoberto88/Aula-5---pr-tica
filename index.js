@@ -28,13 +28,13 @@ let nome = prompt("Digite seu nome");
 
 let salarioBruto = parseFloat(prompt("Digite seu salário bruto"));
 
-let dependentes = prompt("Digite número de dependentes");
+let dependentes = parseInt(prompt("Digite número de dependentes"));
 
 let rendaPerCapita = salarioBruto / (dependentes + 1);
 
 
 if (rendaPerCapita <= 500) {
-  console.log(`${nome} o senhor tem renda per capta de ${rendaPerCapita}, por pessoa então o senhor ficará isento de pagar impostos, por tanto seu salario líquido será igual seu salário bruto que é de R${salarioBruto}`);
+  console.log(`${nome} o senhor tem renda per capta de ${rendaPerCapita}, por pessoa então o senhor ficará isento de pagar impostos, por tanto seu salario líquido será igual seu salário bruto que é de R$ ${salarioBruto}`);
 } else if (rendaPerCapita >= 500) {
   if (salarioBruto > 0 && salarioBruto <= 1903.98) {
 
