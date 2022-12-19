@@ -1,57 +1,92 @@
-/* Problema - 2 - Estrutura Condicional Alinhada
+/* 
 
-1- Elabore um algoritmo para calcular o salário líquido de uma pessoa.
+Problema:
 
-2- Solicite ao usuário que digite seu nome e o valor de seu salário bruto.
+Elabore um algoritmo para calcular o salário líquido de 5 pessoas.
+Solicite ao usuário que digite seu nome e o valor de seu salário bruto.
 
-3- Peça também, para o usuário digitar a quantidade de dependentes.
+Peça também, para o usuário digitar a quantidade de dependentes.
 
-4- Calcule a renda familiar per capta;
+Calcule a renda familiar per capta.
 
-5- Caso a renda para cada membro da família seja menor que R$ 500,00 a pessoa ficará isenta de imposto de renda, ou seja, não será calculado dentre as faixas salariais e seu valor será zero.
+Caso a renda para cada membro da família seja menor do que R$ 500,00 a pessoa ficará isenta de impostos de renda, ou seja, não será calculado dentre as faixas salariais e seu valor será zero "0".
 
-6 - Caso a renda para cada membro da família seja maior ou igual a R$ 500,00 o imposto de renda a ser descontado do salário bruto deve considerar as seguintes regras:
+Caso a renda para cada membro da família seja maior ou igual a R$ 500,00 o imposto de renda a ser descontado do salário bruto deve considerar as seguites regras:
 
-  --> Salário bruto (de 0,00 até 1.903,98) taxa de 5%
+1-Salário bruto (de 0,00 até 1903,98): 5%
 
-  --> Salário bruto (de 1.903,99 até 2.826,65) taxa de 7,5%
+2-Salário bruto (1.903,99 até 2.826,65): 7,5%
 
-  --> Salário bruto (a partir de 2.826,66) taxa dê 15%
+3-Salário bruto (a partir de 2.826,66): 15%
 
-7- Ao final, mostre na tela o valor do salário líquido.
+
+Ao final, mostre na tela o valor do salário líquido.
+
+
+versão 09 - comandos de repetição
 
 */
 
-let prompt = require("prompt-sync")();
+let element = 5;
 
-let nome = prompt("Digite seu nome");
+let prompt = require("prompt-sync")
+();
 
-let salarioBruto = parseFloat(prompt("Digite seu salário bruto"));
+for (let index = 1; index <= element; index++) {
 
-let dependentes = parseInt(prompt("Digite número de dependentes"));
+  const element = [index];
 
-let rendaPerCapita = salarioBruto / (dependentes + 1);
+  console.log("Pessoa ", element);
 
+  let nome = prompt("Digite seu nome");
 
-if (rendaPerCapita <= 500) {
-  console.log(`${nome} o senhor tem renda per capta de ${rendaPerCapita}, por pessoa então o senhor ficará isento de pagar impostos, por tanto seu salario líquido será igual seu salário bruto que é de R$ ${salarioBruto}`);
-} else if (rendaPerCapita >= 500) {
-  if (salarioBruto > 0 && salarioBruto <= 1903.98) {
-
-    let ir5 = salarioBruto * 5 / 100;
-
-    console.log(`${nome} o senhor tem Nº${dependentes} depedentes e seu salário bruto e de R$ ${salarioBruto}, e terá uma taxa de 5%, pois sua renda per capta é de ${rendaPerCapita} por pessoa, sendo assim seu salário líquido menos os descontos ficará em R$ ${salarioBruto - ir5}`);
-
-  } else if (salarioBruto <= 2826.65) {
-
-    let ir75 = salarioBruto * 7.5 / 100;
-
-    console.log(`${nome} o senhor tem Nº${dependentes} depedentes e seu salário bruto e de R$ ${salarioBruto}, e terá uma taxa de 7,5%, pois sua renda per capta é de ${rendaPerCapita}, sendo assim seu salário líquido menos os descontos ficará em R$ ${salarioBruto - ir75}`);
-
+  let salarioBruto = parseFloat(prompt("Digite seu salário bruto"));
+  
+  let dependentes = parseInt(prompt("Numero de dependentes"));
+  
+  let rendaFamiliar = parseInt(salarioBruto / (dependentes + 1));
+  
+  if (rendaFamiliar >= 500) {
+    if (salarioBruto > 0 && salarioBruto < 1903.98) {
+      let salarioLiquido = (salarioBruto * 5) / 100;
+  
+      console.log(
+        "seu salário liquido é de R$",
+        salarioBruto - salarioLiquido,
+        "Você",
+        nome,
+        "foi taxado em 5% sobre seu salário bruto de R$",
+        salarioBruto
+      );
+    } else if (salarioBruto >= 1903.99 && salarioBruto <= 2826.65) {
+      let salarioLiquido = (salarioBruto * 7.5) / 100;
+  
+      console.log(
+        "seu salário liquido é de R$",
+        salarioBruto - salarioLiquido,
+        "Você",
+        nome,
+        "foi taxado em 7.5% sobre seu salário bruto de R$",
+        salarioBruto
+      );
+    } else {
+      let salarioLiquido = (salarioBruto * 15) / 100;
+  
+      console.log(
+        "seu salário liquido é de R$",
+        salarioBruto - salarioLiquido,
+        "Você",
+        nome,
+        "foi taxado em 15% sobre seu salário bruto de R$",
+        salarioBruto
+      );
+    }
   } else {
-    let ir15 = salarioBruto * 15 / 100;
-
-    console.log(`${nome} o senhor tem Nº${dependentes} depedentes e seu salário bruto e de R$ ${salarioBruto}, e terá uma taxa de 15%, pois sua renda per capta é de ${rendaPerCapita}, sendo assim seu salário líquido menos os descontos ficará em R$ ${salarioBruto - ir15}`);
-
+    console.log(
+      "Renda familia de R$",
+      rendaFamiliar,
+      "reais por pessoa.",
+      "Por isso não será cobrado nenhuma taxa, motivo renda familiar abaixo de R$ 500 reais por pessoa"
+    );
   }
 }
