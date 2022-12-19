@@ -1,4 +1,3 @@
-
 let element = 5;
 
 let prompt = require("prompt-sync")
