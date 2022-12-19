@@ -1,31 +1,3 @@
-/* 
-
-Problema:
-
-Elabore um algoritmo para calcular o salário líquido de 5 pessoas.
-Solicite ao usuário que digite seu nome e o valor de seu salário bruto.
-
-Peça também, para o usuário digitar a quantidade de dependentes.
-
-Calcule a renda familiar per capta.
-
-Caso a renda para cada membro da família seja menor do que R$ 500,00 a pessoa ficará isenta de impostos de renda, ou seja, não será calculado dentre as faixas salariais e seu valor será zero "0".
-
-Caso a renda para cada membro da família seja maior ou igual a R$ 500,00 o imposto de renda a ser descontado do salário bruto deve considerar as seguites regras:
-
-1-Salário bruto (de 0,00 até 1903,98): 5%
-
-2-Salário bruto (1.903,99 até 2.826,65): 7,5%
-
-3-Salário bruto (a partir de 2.826,66): 15%
-
-
-Ao final, mostre na tela o valor do salário líquido.
-
-
-versão 09 - comandos de repetição
-
-*/
 
 let element = 5;
 
