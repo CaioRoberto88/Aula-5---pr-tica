@@ -1,111 +1,161 @@
-/* 
+/*
 Problema:
 
-Elabore um algoritmo para calcular o salário líquido de 5 pessoas.
+1-Elabore um algoritmo para calcular o salário líquido de 5 pessoas.
 
-Solicite ao usuário que digite seu nome e o valor de seu salário bruto.
+2-Solicite ao usuário que digite seu nome e o valor do seu salário bruto.
 
-Peça também, para o usuário digitar a quantidade de dependentes.
+3-Peça também, para o usuário digitar a quantidade de dependentes.
 
-Para cada um dos dependentes deve ser solicitado o ganho mensal.
+4-Para cada um dos dependentes deve ser solicitado o ganho mensal, este valor deverá
+ser adicionado ao salário bruto.
 
-Este valor deverá ser adicionado ao salário bruto.
+5-Calcule a renda familiar per capta.
 
-Calcular a renda familiar per capta.
-
-Caso a renda para cada membro da família seja menor do que R$ 500,00 a pessoa ficará isenta de imposto de renda, ou seja, não será calculado dentre as faixas salariais e seu valor será "zero".
-
-Caso a renda para cada membro da família seja maior do que R$500,00 o imposto de renda a ser descontado do salário bruto deve considerar as seguintes regras:
-
-1-Salário bruto (de 0,00 até 1.903,98): taxa de 5%
-
-2-Salario bruto (de 1.903,99 até 2.826,65): taxa de 7,5%
-
-3-Salário bruto (a partir de 2.826,66): taxa de 15%.
-
-Armazene os salários líquidos de uma coleção indexada (array).
-
-Depois, calcule a média de todos os salários líquidos.
-
-Posteriormente, mostre a média dos salários líquidos e quantas pessoas estão abaixo desse valor médio.
+6-Caso a renda para cada família seja menor que R$500,00 a pessoa ficará isenta de imposto de renda, ou seja, não será calculado dentre as faixas salariais e seu valor será 0 "Zero".
 
 
-Versão: 11 - Coleções (Arrays).
+7-Caso a renda para cada membro da família seja maior ou igual a R$500,00 o imposto de renda a ser descontado do salário bruto deve considerar as seguites regras:
+
+a-Salário bruto (de R$0,00 até R$1903,98) taxa de 5%
+
+b-Salário bruto (de R$1903,99 até R$2826,65) taxa de 7,5%
+
+c-Salário bruto (a partir de R$2826,66) taxa de 15%
+
+
+8-Ao final, mostre na tela o valor do salário líquido.
+
+9-Armazene os salários líquidos em uma coleção indexada(Array).
+
+10-Depois, calcule a média de todos os salários líquidos.
+
+11-Posteriormente, mostre a média dos salários líquidos e quantas pessoas estão abaixo desse valor médio.
+
+
+12- refatore seu código. Para isso, crie 2 funções a saber:
+
+a-Função para calcular o IR: esta função deve receber como parâmentros o salário bruto e a renda per capta, e, retornar ao final o valor do IR;
+
+b-Função para calcular a quantidade de salários líquidos menores que a média: esta função deve receber como parâmetros o array de salários líquidos e a média dos salários líquidos, e, retornar a quantidade de salários líquidos menores que a média;
 
 */
-const prompt = require ("prompt-sync")();
+
+const prompt = require("prompt-sync")();
 
 var pessoas = 5;
-var arrSalarios = [];
-var totalSoma = 0;
-var media;
-var contador = 0;
-
-for (let i = 0; i < pessoas; i++) {
-  
-  let nome = prompt("digite seu nome");
-
-let salarioBruto = parseFloat(prompt("digite seu salário bruto"));
-
-let dependentes = parseInt(prompt("digite nº de dependentes"));
 
 var ganhoMensal = 0;
-var ganhoMensal2 = 0;
 
-for (let index = 0; index < dependentes; index++) {
+var ganhoTotal = 0;
 
-  ganhoMensal = parseFloat(prompt("digite o ganho mensal de cada um dos dependentes"));
+var rendaPerCapta = 0;
 
-  ganhoMensal2 = ganhoMensal2 + ganhoMensal;
+var salarioBruto = 0;
 
+var arrSalarios = [];
+
+var salarioTotal = 0;
+
+var media;
+
+var soma = 0;
+
+for (let i = 0; i < pessoas; i++) {
+  var nome = prompt("Digite seu nome");
+
+  var salarioBruto = parseFloat(prompt("digite o seu salário bruto"));
+
+  var dependentes = parseInt(prompt("digite nº de dependentes"));
+
+
+for (let i = 0; i < dependentes; i++) {
+  ganhoMensal = parseInt(prompt("digite o ganho de cada dependente"));
+
+  ganhoTotal = ganhoTotal + ganhoMensal;
 }
 
-let salarioBruto2 = ganhoMensal2 + salarioBruto;
+
+salarioBruto = ganhoTotal + salarioBruto;
 
 
-var rendaPerCapta = parseInt(salarioBruto2 / (dependentes + 1));
 
 
-if (rendaPerCapta >= 500) {
+rendaPerCapta = parseInt(salarioBruto / (dependentes + 1));
 
-  console.log(` O senhor ${nome}, tem renda per capta de R$ ${rendaPerCapta}, por isso será taxado`);
-    if (salarioBruto2 < 1903.98) {
-       var ir5 = salarioBruto2 * 5 / 100;
-        console.log("Salário líquido será de R$", salarioBruto2 - ir5, "taxado em 5%");
-       var salarioLiquido = salarioBruto2 - ir5;
-    }else if(salarioBruto2 > 1903.99 && salarioBruto2 < 2826.66) {
-       var ir7 = salarioBruto2 * 7.5 / 100;
-       console.log("Salário líquido será de R$", salarioBruto2 - ir7, "taxado em 7.5%");
-       var salarioLiquido = salarioBruto2 - ir7;
-    }else {
-       var ir15 = salarioBruto2 * 15 / 100;
-       console.log("Salário líquido será de R$", salarioBruto2 - ir15, "taxado em 15%");
-       var salarioLiquido = salarioBruto2 - ir15;
+var ir = calc_ir(salarioBruto, rendaPerCapta) ;
+ console.log("imposto a pagar de:",ir);
+}
+
+console.log("lista de salários:",arrSalarios);
+
+
+soma = calc_media_menor(arrSalarios,media);
+
+console.log("salários abaixo da média é de:",soma);
+
+
+
+function calc_ir(salarioBruto, rendaPerCapta){
+  if (rendaPerCapta >= 500) {
+    console.log(
+      "Renda familiar superior ou igual a R$500 reais", "e sua renda é de:",
+      rendaPerCapta,
+      "reais por isso será cobrado imposto."
+    );
+    if(salarioBruto < 1903.98){
+  
+      console.log("salario bruto de:",salarioBruto,"sua taxa é de 5%");
+      var ir = salarioBruto * 5 / 100;
+      console.log("salario liquido é de:", salarioBruto - ir, "foi descontado 5% sobre seu salario bruto, desconto foi de:", ir);
+  
+      arrSalarios.push(salarioBruto - ir);
+  
+      
+  
+    }else if (salarioBruto > 1903.98 && salarioBruto <= 2826.65){
+  
+      console.log("salario bruto de:",salarioBruto,"sua taxa é de 7,5%");
+      var ir = salarioBruto * 7.5 / 100;
+      console.log("salario liquido é de:", salarioBruto - ir, "foi descontado 7,5% sobre seu salario bruto, desconto foi de:", ir);
+  
+      arrSalarios.push(salarioBruto - ir);
+  
+    }else{
+      console.log("salario bruto de:",salarioBruto,"sua taxa é de 15%");
+      var ir = salarioBruto * 15 / 100;
+      console.log("salario liquido é de:", salarioBruto - ir, "foi descontado 15% sobre seu salario bruto, desconto foi de:", ir);
+  
+      arrSalarios.push(salarioBruto - ir);
     }
   
-} else {
-
-  console.log(`${nome}, tem renda per capta de R$ ${rendaPerCapta}, por isso está isento de imposto`);
-
+  } else {
+    console.log(
+      "Renda familiar inferior a R$500 reais","sua renda é de:",
+      rendaPerCapta,
+      "reais, por isso fica isento de imposto."
+    );
+  }
+  return ir;
 }
-  arrSalarios.push(salarioLiquido);
-  totalSoma = totalSoma + salarioLiquido;
-}
 
- media = totalSoma / pessoas;
+function calc_media_menor(arrSalarios, media){
 
-console.log("soma de todos salários é de R$", totalSoma);
-
-console.log("media salarial é de R$",  media);
-
-for (let i = 0; i < 4; i++) {
-  
- if ( arrSalarios[i] < media) {
-   contador++;
- } else {
-  
+  for (let i = 0; i < arrSalarios.length; i++) {
+    salarioTotal = salarioTotal + arrSalarios[i];
+ 
  }
+  media = parseInt(salarioTotal / arrSalarios.length);  
+ 
+ console.log("soma dos salários é de:",salarioTotal);
+ 
+ console.log("media total dos salários é de:",media);
+ 
+ for (let i = 0; i < arrSalarios.length; i++) {
   
+   if (arrSalarios[i] < media) {
+     soma++
+   }
+ }
+  return soma;
 }
-
-console.log("Quantidade de pessoas com salário abaixo da média é ",contador);
